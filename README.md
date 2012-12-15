@@ -21,6 +21,7 @@ The Cisco ASA tested reports that usernames and passwords must be longer than 3 
 
 Details of the Cisco PIX password encryption mechanism have been disclosed for a long time:
 * http://www.oxid.it/downloads/pix_passwd.txt
+* http://www.perlmonks.org/index.pl?node_id=797623
 
 The basic mechanism is:
 * Salt password by appending the first 4 characters of the username
