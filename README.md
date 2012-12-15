@@ -25,13 +25,13 @@ Details of the Cisco PIX password encryption mechanism have been disclosed for a
 The basic mechanism is:
 * Salt password by appending the first 4 characters of the username
 * Pad with nulls or trim to 16 characters
-* MD5 hash
+* MD5 hash (for this I use the BSD Licensed code from http://pajhome.org.uk/crypt/md5, included in this repo)
 * Sort of base64 encode
  * The usual encoding technique is to work with 24-bit input blocks, creating 4 printable characters identified by 6-bit groups from that 24-bit block.
  * The technique here is to work with 32-bit blocks of the hash, creating 4 printable characters from 6-bit groups and discarding the remaining bits. 
  * The encoding character set is as per _crypt_to64 from the [FreeBSD crypto libraries](http://svnweb.freebsd.org/base/head/lib/libcrypt/misc.c?view=markup)
 
-Since the time of the diclosure above newer ASA/PIX software versions have increased the allowed password length from 16 to 32 character:
+Since the time of the disclosure above newer ASA/PIX software versions have increased the allowed password length from 16 to 32 character:
 * http://www.cisco.com/en/US/docs/security/asa/asa70/release/notes/asarn705.html#wp286405
 
 A small amount of testing shows that the principle for the newer software seems to be similar, with the following details:
