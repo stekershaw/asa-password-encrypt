@@ -27,7 +27,7 @@ The basic mechanism is:
 * Pad with nulls or trim to 16 characters
 * MD5 hash (for this I use the BSD Licensed code from http://pajhome.org.uk/crypt/md5, included in this repo)
 * Sort of base64 encode
- * The usual encoding technique is to work with 24-bit input blocks, creating 4 printable characters identified by 6-bit groups from that 24-bit block.
+ * The usual encoding technique is to work with 24-bit input blocks, creating 4 printable characters identified by 6-bit groups from that 24-bit block. See [RFC4648](https://tools.ietf.org/html/rfc4648).
  * The technique here is to work with 32-bit blocks of the hash, creating 4 printable characters from 6-bit groups and discarding the remaining bits. 
  * The encoding character set is as per _crypt_to64 from the [FreeBSD crypto libraries](http://svnweb.freebsd.org/base/head/lib/libcrypt/misc.c?view=markup)
 
