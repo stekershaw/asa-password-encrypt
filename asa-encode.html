@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <title>
-        ASA p/w gen
+        ASA encrypted password generator
     </title>
 
     <script type="text/javascript">
@@ -35,8 +35,8 @@
         <tr>
             <th>Maximum password length</th>
             <td>
-                <input type="radio" name="passLength" checked="checked" value="32">32 - ASA/PIX after <a href="http://www.cisco.com/en/US/docs/security/asa/asa70/release/notes/asarn705.html#wp286405">software 7.0(5)</a><br>
-                <input type="radio" name="passLength" value="16">16 - older ASA/PIX
+                <input type="radio" name="passLength" checked="checked" value="32" />32 - ASA/PIX after <a href="http://www.cisco.com/en/US/docs/security/asa/asa70/release/notes/asarn705.html#wp286405">software 7.0(5)</a><br />
+                <input type="radio" name="passLength" value="16" />16 - older ASA/PIX
             </td>
         </tr>
         <tr>
@@ -45,31 +45,39 @@
         </tr>
         <tr>
             <th>Password</th>
-            <td><input type="text" id="password" size="40" /></td>
+            <td><input type="password" id="password" size="32" /></td>
         </tr>
         <tr>
-            <th>Calculate</th>
+            <th>Confirm password</th>
+            <td><input type="password" id="password2" size="32" /></td>
+        </tr>
+        <tr>
+            <th></th>
             <td style="text-align:center;">
-                <input type="button" id="goButton" value="Cisco" />
+                <input type="button" id="goButton" value="Encrypt" />
             </td>
         </tr>
         <tr>
             <th>Result</th>
-            <td><input type="text" id="hash" size="40" /></td>
+            <td><input type="text" id="hash" size="40" readonly="readonly" /></td>
         </tr>
     </table>
 
     <script type="text/javascript">
         document.getElementById('goButton').onclick = function () {
             "use strict";
-            var passLengthRadio, passLength, i;
+            var passLengthRadio, passLength, i, length;
             passLengthRadio = document.getElementsByName('passLength');
             for (i = 0, length = passLengthRadio.length; i < length; i++) {
                 if (passLengthRadio[i].checked) {
                     passLength = passLengthRadio[i].value;
                 }
             }
-            document.getElementById('hash').value = generate_encrypted_password(document.getElementById('username').value, document.getElementById('password').value, passLength);
+            if (document.getElementById('password').value !== document.getElementById('password2').value) {
+                document.getElementById('hash').value = "Passwords don't match";
+            } else {
+                document.getElementById('hash').value = generate_encrypted_password(document.getElementById('username').value, document.getElementById('password').value, passLength);
+            }
         };
     </script>
 </body>
