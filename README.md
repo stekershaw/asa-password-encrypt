@@ -1,7 +1,7 @@
 asa-password-encrypt
 ====================
 
-Simple web page and Javascript to generate an encrypted password for a Cisco ASA (or PIX).
+Simple web page and Javascript to take plaintext credentials and generate an encrypted password suitable for a Cisco ASA (or PIX).
 
 Although RADIUS & TACACS+ can be used for AAA there are usually occasions where the local database is used. The purpose of this code is for those occasions. It is allows a user to generate an encrypted password that can be entered in to the device config without the administrator knowing the plaintext. This avoid the potential situation where an administrator knows the user's password because a user does not have the privileges to change the password.
 
@@ -10,9 +10,9 @@ The encrypted password can be directly entered into the device configuration. Fo
     username pengujian password uR6OT85Pkj4/O13E encrypted
 
 ## Caveats ##
-* If you do not see the password then you do not know whether it meets password policies. This code in its raw form does not enforce any password policy but it is likely an important consideration.
-* The encrypted form of the password is not to be considered super-strong. It is useful to hide the password plaintext but should not be distributed, as per the plaintext itself.
-* The output from this code has been tested (lightly) to work with ASA software 8.2(3) only. I believe it should work fine with others but have not verified.
+* If you as an administrator do not see the password then you do not know whether it meets password policies. This code in its current form does not enforce any password policy but it is likely an important consideration.
+* The encrypted form of the password should not be considered super-strong. I am certainly dubious about the cryptographic strength of this approach - it certainly seems to have some bad aspects. It is useful to hide the password plaintext but should not be widely distributed, in the same was that one would not distribute the plaintext itself.
+* The output from this code has only been tested (lightly) to work with ASA software 8.2(3). I believe it should work fine with other versions but I have not verified this.
 * Not all edge cases have been tested e.g. I have not tested the behaviour with 3 character usernames
 
 The Cisco ASA tested reports that usernames and passwords must be longer than 3 characters and passwords no longer than 32 characters. 
